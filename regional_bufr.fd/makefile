@@ -37,15 +37,15 @@ FREE     = -FR
 TRAPS    = 
 DEBUG    = -g -traceback #  -fpe0 -ftrapuv  -check all 
 
- WRFLIB    = /mnt/lfs4/BMC/nrtrr/wrflibs/libwrflib.a  \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/pack_utils.o  \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libfftpack.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libio_grib1.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libio_grib_share.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libwrfio_int.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libwrfio_nf.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/libesmf_time.a \
-             /mnt/lfs4/BMC/nrtrr/wrflibs/librsl_lite.a
+WRFLIB    = ./wrflibs/libwrflib.a  \
+            ./wrflibs/pack_utils.o  \
+            ./wrflibs/libfftpack.a \
+            ./wrflibs/libio_grib1.a \
+            ./wrflibs/libio_grib_share.a \
+            ./wrflibs/libwrfio_int.a \
+            ./wrflibs/libwrfio_nf.a \
+            ./wrflibs/libesmf_time.a \
+            ./wrflibs/librsl_lite.a
 
 
 #
@@ -73,7 +73,7 @@ OBJST= module_internal_header_util.o getIVariableB.o getIVariable.o getVariableB
 #
 OBJS=	VRBLS2D_mod.o VRBLS3D_mod.o MASKS_mod.o SOIL_mod.o \
  WRFBUFR.o PROF_EM.o PROF_NMM.o  PROF_NMM_NET.o PROF_EM_NET.o PROF_NMMB_SERIAL.o \
-PROF_FV3SAR_NET.o \
+PROF_FV3SAR_NET.o PROF_EM_NET_HRRR.o \
 iw3jdn.o w3fs26.o w3movdat.o w3reddat.o gdswiz.o gdswiz01.o \
 gdswiz03.o gdswiz05.o
 #
