@@ -79,18 +79,22 @@ C
        read(11,111) fileNamePhys
 !	write(0,*) 'initial filename= ', filename
        read(11,113) model
-!	write(0,*) 'model type= ', model
+	write(0,*) 'model type= ', model
        read(11,113) IOFORM
-!	write(0,*) 'ioform= ', ioform
+	write(0,*) 'ioform= ', ioform
        read(11,112) DateStr
-!	write(0,*) 'datestr= ', datestr
+	write(0,*) 'datestr= ', datestr
        read(11,*) NFILES
        read(11,*) INCR
        read(11,*) IHR
        read(11,111) prefileNameDyn
        read(11,111) prefileNamephys
 !        write(0,*) 'previous filename= ', prefilename
-
+       if (model(1:4) .eq. 'RAPR') then
+        fileName=fileNamePhys
+        prefileName=prefileNameDyn
+       endif 
+        
 !!!! CHANGE THIS ASSUMPTION???
 
 ! assume for now that the first date in the stdin file is the start date
@@ -132,6 +136,8 @@ C
 	write(DateStr,302) JDATE(1),JDATE(2),JDATE(3),JDATE(5)
 	elseif (model(1:4) .eq. 'NCAR') then
 	write(DateStr,302) JDATE(1),JDATE(2),JDATE(3),JDATE(5)
+        elseif (model(1:4) .eq. 'RAPR') then
+        write(DateStr,302) JDATE(1),JDATE(2),JDATE(3),JDATE(5)
 	endif
 
 c20080707	filename=filename(1:len-19)//DateStr
@@ -161,6 +167,10 @@ c20080707	filename=filename(1:len-19)//DateStr
         write(0,*) 'call PROF_EM'
 	CALL PROF_EM(fileName,prefileName,DateStr,IHR,INCR)
         write(0,*) 'return PROF_EM'
+        elseif (model(1:4) .eq. 'RAPR') then
+        write(0,*) 'call PROF_EM'
+        CALL PROF_EM(fileName,prefileName,DateStr,IHR,INCR)
+        write(0,*) 'return PROF_EM'
         elseif (model(1:4) .eq. 'nmmb') then
 	CALL PROF_NMMB_SERIAL(fileName,IHR,INCR)
 	endif
@@ -173,7 +183,10 @@ c20080707	filename=filename(1:len-19)//DateStr
         CALL PROF_FV3SAR_NET(fileNamedyn,filenamephys,DateStr,IHR,INCR)
 	elseif (model(1:4) .eq. 'NCAR') then
 	CALL PROF_EM_NET(fileName,DateStr,IHR,INCR)
-	endif
+	elseif (model(1:4) .eq. 'RAPR') then
+        print *, 'call PROF_EM_NET'
+        CALL PROF_EM_NET_HRRR(fileName,DateStr,IHR,INCR)
+        endif
 
 	endif
 

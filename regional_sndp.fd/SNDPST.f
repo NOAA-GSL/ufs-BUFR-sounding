@@ -78,9 +78,9 @@ C
 
       if (core .eq. 'arw' ) then
 	if (nlev .eq. 40 .or. nlev .eq. 50) then
-!          write(0,*) 'will call SNDPST_EM with ', nlev
-!          call SNDPST_EM(nlev,nlev)
-          write(0,*) 'this code not supporting ARW'
+          write(0,*) 'will call SNDPST_EM with ', nlev
+          call SNDPST_EM
+C          write(0,*) 'this code not supporting ARW'
         else
           write(0,*) 'bad nlev: ', nlev
 	  STOP 67
